@@ -47,6 +47,16 @@ android {
     }
 }
 
+apollo{
+    service("first time"){
+        packageName.set("src.main.grapghql")
+        introspection {
+            endpointUrl = "https://countries.trevorblades.com/"
+            schemaFile.set("src/main/graphql/kumar/snehil/graphql/scema.sdl")
+        }
+    }
+}
+
 dependencies {
     // Core & Compose
     implementation(libs.androidx.core.ktx)
