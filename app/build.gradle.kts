@@ -41,21 +41,19 @@ android {
     buildFeatures {
         compose = true
     }
-    // This is required to match the Kotlin version 2.0.0
     composeOptions {
         kotlinCompilerExtensionVersion = "2.0.0"
     }
 }
 
 apollo {
-    service("first time") {
-        // 1. This is now a valid Kotlin package name.
-        // Your generated classes will be in `com.example.graphql.api`
+    service("countries") {
         packageName.set("com.example.graphql.api")
 
+        // Download schema from introspection
         introspection {
-            endpointUrl = "https://countries.trevorblades.com/" // This is the error
-            schemaFile.set("src/main/graphql/kumar/snehil/graphql/scema.sdl")
+            endpointUrl.set("https://countries.trevorblades.com/")
+            schemaFile.set(file("src/main/graphql/schema.graphqls"))
         }
     }
 }
