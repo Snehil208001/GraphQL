@@ -50,14 +50,11 @@ apollo {
     service("countries") {
         packageName.set("com.example.graphql.api")
 
-        // Download schema from introspection
-        introspection {
-            endpointUrl.set("https://countries.trevorblades.com/")
-            schemaFile.set(file("src/main/graphql/schema.graphqls"))
-        }
+        // This tells Apollo to look in "src/main/graphql"
+        // for both the schema and your new query file.
+        srcDir("src/main/graphql")
     }
 }
-
 dependencies {
     // Core & Compose
     implementation(libs.androidx.core.ktx)
