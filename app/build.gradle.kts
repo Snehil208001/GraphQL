@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.apollo)
-
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.dagger)
     id("kotlin-parcelize")
     kotlin("kapt")
-
 }
 
 android {
@@ -20,7 +19,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -43,10 +41,14 @@ android {
     buildFeatures {
         compose = true
     }
+    // This is required to match the Kotlin version 2.0.0
+    composeOptions {
+        kotlinCompilerExtensionVersion = "2.0.0"
+    }
 }
 
 dependencies {
-
+    // Core & Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -55,6 +57,22 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Apollo
+    implementation(libs.apollo.runtime)
+
+    // Dagger - Hilt
+    implementation(libs.dagger.hilt)
+    implementation(libs.hilt.compose.navigation)
+    kapt(libs.dagger.kapt)
+
+    // Navigation
+    implementation(libs.navigation.compose)
+
+    // Serialization
+    implementation(libs.kotlinx.serialization)
+
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -62,17 +80,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    // apollo
-    implementation(libs.apollo.runtime)
-
-    // dagger
-    implementation(libs.dagger.hilt)
-    implementation(libs.hilt.compose.navigation)
-    kapt(libs.dagger.kapt)
-
-    // navigation
-    implementation(libs.navigation.compose)
-    implementation(libs.kotlinx.serialization)
-
 }
