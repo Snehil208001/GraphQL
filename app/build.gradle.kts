@@ -47,11 +47,14 @@ android {
     }
 }
 
-apollo{
-    service("first time"){
-        packageName.set("src.main.grapghql")
+apollo {
+    service("first time") {
+        // 1. This is now a valid Kotlin package name.
+        // Your generated classes will be in `com.example.graphql.api`
+        packageName.set("com.example.graphql.api")
+
         introspection {
-            endpointUrl = "https://countries.trevorblades.com/"
+            endpointUrl = "https://countries.trevorblades.com/" // This is the error
             schemaFile.set("src/main/graphql/kumar/snehil/graphql/scema.sdl")
         }
     }
